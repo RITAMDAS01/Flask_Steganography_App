@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Image Steganography</h2>
+    
+    <div class="container">
+        <h3>Encrypt Message</h3>
+        <input type="file" id="imageInput">
+        <input type="text" id="messageInput" placeholder="Enter Secret Message">
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <button onclick="encrypt()">Encrypt</button>
+        
+        <h3>Decrypt Message</h3>
+        <input type="password" id="decryptPassword" placeholder="Enter Password">
+        <button onclick="decrypt()">Decrypt</button>
+        <p id="decryptedMessage"></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
