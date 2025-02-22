@@ -63,7 +63,7 @@ def encrypt():
     db[password] = {"message": msg}
     save_db(db)
     
-    cv2.imwrite("static/encrypted_image.png", encrypted_img)
+    cv2.imwrite("encrypted_image.png", encrypted_img)
     return jsonify({"status": "Success", "image": "static/encrypted_image.png"})
 
 @app.route("/decrypt", methods=["POST"])
