@@ -1,3 +1,5 @@
+const baseURL = "https://flasksteganographyapp-production.up.railway.app";  // Use this for deployed API
+
 function encrypt() {
     let image = document.getElementById("imageInput").files[0];
     let message = document.getElementById("messageInput").value;
@@ -8,15 +10,16 @@ function encrypt() {
     formData.append("message", message);
     formData.append("password", password);
 
-    fetch("/encrypt", { method: "POST", body: formData })
+    fetch(`${baseURL}/encrypt`, { method: "POST", body: formData })
     .then(response => response.json())
     .then(data => {
         if (data.status === "Success") {
-            alert("Image Encrypted! Download: " + data.image);
+            alert("Image Encrypted! Download: " + baseURL + "/" + data.image);
         } else {
             alert("Error: " + data.error);
         }
-    });
+    })
+    .catch(error => console.error("Error:", error));
 }
 
 function decrypt() {
@@ -24,7 +27,7 @@ function decrypt() {
     let formData = new FormData();
     formData.append("password", password);
 
-    fetch("/decrypt", { method: "POST", body: formData })
+    fetch(`${baseURL}/decrypt`, { method: "POST", body: formData })
     .then(response => response.json())
     .then(data => {
         if (data.status === "Success") {
@@ -32,14 +35,15 @@ function decrypt() {
         } else {
             alert("Error: " + data.error);
         }
-    });
+    })
+    .catch(error => console.error("Error:", error));
 }
-const baseURL = "https://flasksteganographyapp-production.up.railway.app";
-fetch(`${baseURL}/encrypt`, {
-    method: "POST",
-    body: formData
+fetch(`${baseURL}/encrypt`, { method: "POST", body: formData })
+.then(response => {
+    if (!response.ok) {
+        throw new Error("Network response was not OK");
+    }
+    return response.json();
 })
-.then(response => response.json())
 .then(data => console.log(data))
 .catch(error => console.error("Error:", error));
-
