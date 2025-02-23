@@ -38,12 +38,4 @@ function decrypt() {
     })
     .catch(error => console.error("Error:", error));
 }
-fetch(`${baseURL}/encrypt`, { method: "POST", body: formData })
-.then(response => {
-    if (!response.ok) {
-        throw new Error("Network response was not OK");
-    }
-    return response.json();
-})
-.then(data => console.log(data))
-.catch(error => console.error("Error:", error));
+
