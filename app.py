@@ -37,7 +37,11 @@ def encode_message(img, msg):
                     return img
     return img
 
+from flask import send_from_directory
 
+@app.route("/download/<filename>")
+def download_file(filename):
+    return send_from_directory("static", filename)
 @app.route("/")
 def index():
     return render_template("index.html")
