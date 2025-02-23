@@ -6,26 +6,28 @@
     <title>Steganography App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
-
 </head>
 <body>
     <h2>Image Steganography</h2>
     
     <div class="container">
         <h3>Encrypt Message</h3>
-        <input type="file" id="imageInput">
-        <input type="text" id="messageInput" placeholder="Enter Secret Message">
-        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <input type="file" id="imageInput"><br>
+        <input type="text" id="messageInput" placeholder="Enter Secret Message"><br>
+        <input type="password" id="passwordInput" placeholder="Enter Password"><br>
         <button onclick="encrypt()">Encrypt</button>
         
+        <br><br>
+        <a id="downloadLink" href="#" style="display:none;" download="encrypted_image.png">Download Encrypted Image</a>
+    </div>
+
+    <div class="container">
         <h3>Decrypt Message</h3>
-        <input type="password" id="decryptPassword" placeholder="Enter Password">
+        <input type="password" id="decryptPassword" placeholder="Enter Password"><br>
         <button onclick="decrypt()">Decrypt</button>
         <p id="decryptedMessage"></p>
     </div>
 
     <script type="text/javascript" src="script.js"></script>
-
 </body>
 </html>
