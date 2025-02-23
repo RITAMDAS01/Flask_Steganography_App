@@ -20,7 +20,7 @@ def load_db():
 
 def save_db(data):
     with open(DB_FILE, "w") as f:
-        json.dump(data, f)
+        json.dump(data, f)        
 
 def encode_message(img, msg):
     msg += "####"  # End delimiter to know where to stop reading
@@ -38,7 +38,12 @@ def encode_message(img, msg):
     return img
 
 from flask import send_from_directory
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+if __name__ == '__main__':
+    app.run(debug=True)
 @app.route("/download/<filename>")
 def download_file(filename):
     return send_from_directory("static", filename)
