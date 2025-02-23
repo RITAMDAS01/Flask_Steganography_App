@@ -23,18 +23,20 @@ def save_db(data):
         json.dump(data, f)
 
 def encode_message(img, msg):
-    d = {chr(i): i for i in range(255)}
-    m, n, z = 0, 0, 0
-    for char in msg:
-        if n >= img.shape[0] or m >= img.shape[1]:
-            return None  # Message too long
-        img[n, m, z] = d[char]
-        n += 1
-        m = (m + 1) % img.shape[1]
-        if m == 0:
-            n += 1
-        z = (z + 1) % 3
+    msg += "####"  # End delimiter to know where to stop reading
+    binary_msg = ''.join(format(ord(c), '08b') for c in msg)  # Convert to binary
+    
+    data_idx = 0
+    for row in img:
+        for pixel in row:
+            for i in range(3):  # RGB channels
+                if data_idx < len(binary_msg):
+                    pixel[i] = (pixel[i] & 0b11111110) | int(binary_msg[data_idx])  # Modify LSB
+                    data_idx += 1
+                else:
+                    return img
     return img
+
 
 @app.route("/")
 def index():
