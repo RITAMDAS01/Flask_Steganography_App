@@ -38,4 +38,26 @@ function decrypt() {
     })
     .catch(error => console.error("Error:", error));
 }
+fetch(`${baseURL}/encrypt`, { 
+    method: "POST", 
+    body: formData 
+})
+.then(response => {
+    return response.text(); // Get raw text instead of JSON
+})
+.then(text => {
+    try {
+        let data = JSON.parse(text); // Try parsing JSON
+        if (data.status === "Success") {
+            alert("Image Encrypted! Download: " + data.image);
+        } else {
+            alert("Error: " + data.error);
+        }
+    } catch (error) {
+        console.error("Invalid JSON Response:", text);
+        alert("Server returned invalid JSON. Check console for details.");
+    }
+})
+.catch(error => console.error("Fetch error:", error));
+
 
