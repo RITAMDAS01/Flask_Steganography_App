@@ -34,3 +34,12 @@ function decrypt() {
         }
     });
 }
+const baseURL = "https://flasksteganographyapp-production.up.railway.app";
+fetch(`${baseURL}/encrypt`, {
+    method: "POST",
+    body: formData
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error("Error:", error));
+
