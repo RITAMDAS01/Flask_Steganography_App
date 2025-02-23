@@ -1,4 +1,4 @@
-const baseURL = "https://flasksteganographyapp-production.up.railway.app";  // Use this for deployed API
+  // Use this for deployed API
 
 function encrypt() {
     let image = document.getElementById("imageInput").files[0];
